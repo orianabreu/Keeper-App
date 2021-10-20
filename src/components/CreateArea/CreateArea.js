@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+import Zoom from "@mui/material/Zoom";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
+import { amber } from "@mui/material/colors";
 
 export default function CreateArea(props) {
   const [noteText, setNoteText] = useState({
     title: "",
     content: "",
   });
+
+  const [expandedNote, setExpandedNote] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -26,25 +32,38 @@ export default function CreateArea(props) {
   };
 
   const { title, content } = noteText;
+  const amberColor = amber[500];
 
   return (
     <div>
       <form>
-        <input
-          type='text'
-          name='title'
-          value={title}
-          onChange={handleChange}
-          placeholder='Title'
-        />
+        {expandedNote && (
+          <input
+            type='text'
+            name='title'
+            value={title}
+            onChange={handleChange}
+            placeholder='Title'
+          />
+        )}
         <textarea
           name='content'
           value={content}
-          onChange={handleChange}
-          row='3'
+          row={expandedNote ? "6" : "1"}
           placeholder='Take a note...'
+          onChange={handleChange}
+          onClick={() => setExpandedNote(true)}
         />
-        <button onClick={handleClick}>Add</button>
+        <Zoom in={expandedNote}>
+          <Fab
+            aria-label='add'
+            color='primary'
+            className='addnote-btn'
+            onClick={handleClick}
+          >
+            <AddIcon />
+          </Fab>
+        </Zoom>
       </form>
     </div>
   );

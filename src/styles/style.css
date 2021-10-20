@@ -85,6 +85,16 @@ form textarea {
   font-family: inherit;
   resize: none;
 }
+
+.addnote-btn {
+  position: absolute;
+  left: 400px;
+  bottom: -40px;
+  cursor: pointer;
+  background: #f5ba13;
+}
+
+/*
 form button {
   position: absolute;
   right: 18px;
@@ -99,3 +109,4 @@ form button {
   cursor: pointer;
   outline: none;
 }
+*/
