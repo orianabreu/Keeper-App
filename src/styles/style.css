@@ -91,7 +91,10 @@ form textarea {
   left: 400px;
   bottom: -40px;
   cursor: pointer;
-  background: #f5ba13;
+}
+
+.MuiFab-primary {
+  background-color: #f5ba13;
 }
 
 /*

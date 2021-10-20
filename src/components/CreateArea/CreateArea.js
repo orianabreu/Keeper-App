@@ -3,6 +3,16 @@ import Zoom from "@mui/material/Zoom";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { amber } from "@mui/material/colors";
+import { styled } from "@mui/material/styles";
+
+const FabButton = styled(Fab)({
+  backgroundColor: amber[500],
+  color: "#fff",
+  "&:hover": {
+    backgroundColor: amber[400],
+    borderColor: amber[400],
+  },
+});
 
 export default function CreateArea(props) {
   const [noteText, setNoteText] = useState({
@@ -32,7 +42,6 @@ export default function CreateArea(props) {
   };
 
   const { title, content } = noteText;
-  const amberColor = amber[500];
 
   return (
     <div>
@@ -55,14 +64,13 @@ export default function CreateArea(props) {
           onClick={() => setExpandedNote(true)}
         />
         <Zoom in={expandedNote}>
-          <Fab
+          <FabButton
             aria-label='add'
-            color='primary'
             className='addnote-btn'
             onClick={handleClick}
           >
             <AddIcon />
-          </Fab>
+          </FabButton>
         </Zoom>
       </form>
     </div>
