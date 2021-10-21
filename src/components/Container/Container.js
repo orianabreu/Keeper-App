@@ -20,6 +20,13 @@ export default function Container() {
     });
   };
 
+  const handleUpdateNote = (id, updatedNote) => {
+    const updatedItem = notes.map((note, index) => {
+      return index === id ? updatedNote : note;
+    });
+    setNotes(updatedItem);
+  };
+
   return (
     <div>
       <CreateArea addNote={addNote} />
@@ -31,6 +38,7 @@ export default function Container() {
             title={note.title}
             content={note.content}
             deleteNote={deleteNote}
+            handleUpdateNote={handleUpdateNote}
           />
         );
       })}

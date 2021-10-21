@@ -40,7 +40,7 @@ footer p {
   border-radius: 7px;
   box-shadow: 0 2px 5px #ccc;
   padding: 10px;
-  width: 240px;
+  width: 300px;
   margin: 16px;
   float: left;
 }
@@ -75,10 +75,20 @@ form {
   border-radius: 7px;
   box-shadow: 0 1px 5px rgb(138, 137, 137);
 }
+
 form input,
 form textarea {
   width: 100%;
   border: none;
+  padding: 4px;
+  outline: none;
+  font-size: 1.2em;
+  font-family: inherit;
+  resize: none;
+}
+
+.edit-input {
+  border: solid 1px #f5ba13;
   padding: 4px;
   outline: none;
   font-size: 1.2em;
@@ -91,10 +101,6 @@ form textarea {
   left: 400px;
   bottom: -40px;
   cursor: pointer;
-}
-
-.MuiFab-primary {
-  background-color: #f5ba13;
 }
 
 /*
