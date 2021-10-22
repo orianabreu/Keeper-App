@@ -1,19 +1,26 @@
 import React, { useState } from "react";
 
-export default function Note(props) {
+export default function Note({
+  id,
+  title,
+  content,
+  handleUpdateNote,
+  deleteNote,
+}) {
   const [editNote, setEditNote] = useState(false);
   const [currentNote, setCurrentNote] = useState({
-    editTitle: "",
-    editContent: "",
+    id,
+    editTitle: title,
+    editContent: content,
   });
 
   const handleDelete = () => {
-    props.deleteNote(props.id);
+    deleteNote(id);
   };
 
   const handleEdit = () => {
     setEditNote(true);
-    setCurrentNote({ ...props.noteText });
+    setCurrentNote((prevValue) => ({ ...prevValue }));
   };
 
   const handleInputEdit = (event) => {
@@ -26,7 +33,11 @@ export default function Note(props) {
   };
 
   const updateNote = () => {
-    props.handleUpdateNote(currentNote);
+    handleUpdateNote({
+      id: currentNote.id,
+      title: currentNote.editTitle,
+      content: currentNote.editContent,
+    });
     setEditNote(false);
   };
 
@@ -36,13 +47,13 @@ export default function Note(props) {
         <div className='note'>
           <input
             type='text'
-            name='edittitle'
+            name='editTitle'
             value={currentNote.editTitle}
             onChange={handleInputEdit}
             className='edit-input'
           />
           <textarea
-            name='editcontent'
+            name='editContent'
             value={currentNote.editContent}
             row='1'
             onChange={handleInputEdit}
@@ -53,8 +64,8 @@ export default function Note(props) {
         </div>
       ) : (
         <div className='note' onDoubleClick={handleEdit}>
-          <h1>{props.title}</h1>
-          <p>{props.content}</p>
+          <h1>{title}</h1>
+          <p>{content}</p>
           <button onClick={handleDelete}>DELETE</button>
         </div>
       )}

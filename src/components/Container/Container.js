@@ -20,11 +20,17 @@ export default function Container() {
     });
   };
 
-  const handleUpdateNote = (id, updatedNote) => {
-    const updatedItem = notes.map((note, index) => {
-      return index === id ? updatedNote : note;
-    });
-    setNotes(updatedItem);
+  const handleUpdateNote = ({ id, title, content }) => {
+    const _notes = [];
+    for (let i = 0; i < notes.length; i++) {
+      if (i === id) {
+        _notes.push({ id, title, content });
+      } else {
+        _notes.push(notes[i]);
+      }
+    }
+
+    setNotes(_notes);
   };
 
   return (
