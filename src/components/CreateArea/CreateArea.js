@@ -2,17 +2,10 @@ import React, { useState } from "react";
 import Zoom from "@mui/material/Zoom";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-import { amber } from "@mui/material/colors";
+import { amber, yellow } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
 
-const FabButton = styled(Fab)({
-  backgroundColor: amber[500],
-  color: "#fff",
-  "&:hover": {
-    backgroundColor: amber[400],
-    borderColor: amber[400],
-  },
-});
+import { useTheme } from "../../ThemeContext/ThemeContext";
 
 export default function CreateArea(props) {
   const [noteText, setNoteText] = useState({
@@ -43,9 +36,29 @@ export default function CreateArea(props) {
 
   const { title, content } = noteText;
 
+  const darkTheme = useTheme();
+
+  const FabButton = styled(Fab)({
+    backgroundColor: darkTheme ? yellow[50] : amber[500],
+    color: darkTheme ? "black" : "#fff",
+    "&:hover": {
+      backgroundColor: darkTheme ? yellow[100] : amber[400],
+      borderColor: darkTheme ? yellow[100] : amber[400],
+    },
+  });
+
+  const formStyles = {
+    backgroundColor: darkTheme ? "#202124" : "#fff",
+    border: darkTheme && "solid 1px #eee",
+  };
+  const inputStyles = {
+    backgroundColor: darkTheme ? "#202124" : "#fff",
+    color: darkTheme ? "#eee" : "black",
+  };
+
   return (
     <div>
-      <form>
+      <form style={formStyles}>
         {expandedNote && (
           <input
             type='text'
@@ -53,6 +66,7 @@ export default function CreateArea(props) {
             value={title}
             onChange={handleChange}
             placeholder='Title'
+            style={inputStyles}
           />
         )}
         <textarea
@@ -62,6 +76,7 @@ export default function CreateArea(props) {
           placeholder='Take a note...'
           onChange={handleChange}
           onClick={() => setExpandedNote(true)}
+          style={inputStyles}
         />
         <Zoom in={expandedNote}>
           <FabButton

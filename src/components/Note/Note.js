@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTheme } from "../../ThemeContext/ThemeContext";
 
 export default function Note({
   id,
@@ -41,16 +42,25 @@ export default function Note({
     setEditNote(false);
   };
 
+  const darkTheme = useTheme();
+
+  const themeStyles = {
+    backgroundColor: darkTheme ? "#202124" : "#fff",
+    border: darkTheme && "solid 1px #eee",
+    color: darkTheme ? "#eee" : "black",
+  };
+
   return (
     <div>
       {editNote ? (
-        <div className='note'>
+        <div style={themeStyles} className='note'>
           <input
             type='text'
             name='editTitle'
             value={currentNote.editTitle}
             onChange={handleInputEdit}
             className='edit-input'
+            style={themeStyles}
           />
           <textarea
             name='editContent'
@@ -58,12 +68,13 @@ export default function Note({
             row='1'
             onChange={handleInputEdit}
             className='edit-input'
+            style={themeStyles}
           />
           <button onClick={() => setEditNote(false)}>Cancel</button>
           <button onClick={updateNote}>Save</button>
         </div>
       ) : (
-        <div className='note' onDoubleClick={handleEdit}>
+        <div style={themeStyles} className='note' onDoubleClick={handleEdit}>
           <h1>{title}</h1>
           <p>{content}</p>
           <button onClick={handleDelete}>DELETE</button>
